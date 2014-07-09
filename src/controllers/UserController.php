@@ -138,6 +138,11 @@ class UserController extends BaseController
                 {
                     $group = Sentry::getGroupProvider()->findById($groupId);
                     $user->addGroup($group);
+
+                    // 添加到厂商表
+                    if($groupId == 2) {
+                        \Event::fire('vendors.create', [$user]);
+                    }
                 }
             }
         }
@@ -377,6 +382,11 @@ class UserController extends BaseController
                         {
                             $group = Sentry::getGroupProvider()->findById($groupId);
                             $user->addGroup($group);
+
+                            // 添加到厂商表
+                            if($groupId == 2) {
+                                \Event::fire('vendors.update', [$user]);
+                            }
                         }
                     }
                 }
